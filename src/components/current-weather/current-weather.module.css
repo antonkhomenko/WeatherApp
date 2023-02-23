@@ -1,0 +1,12 @@
+.weather {
+    max-width: 418px;
+    height: 228px;
+    background-image: url(/src/assets/imgs/weatherBg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+}
+
+
