@@ -2,11 +2,80 @@
     max-width: 418px;
     height: 228px;
     background-image: url(/src/assets/imgs/weatherBg.png);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     display: grid;
     grid-template-columns: 1fr 200px;
+    grid-template-rows: 100px 1fr;
+    position: relative;
+    padding-left: 50px;
+    padding-bottom: 15px;
+    padding-right: 25px;
+    margin-top: 80px;
+    box-sizing: border-box;
 }
 
+
+.temperature {
+    font-size: 79px;
+    color: white;
+    letter-spacing: 0.5px;
+    margin: 15px 0 0 0;
+    grid-column: 1 / 3;
+}
+
+.weatherIcon {
+    width: 198px;
+    height: 198px;
+    position: absolute;
+    top: -24px;
+    right: 10px;
+}
+
+.details {
+    color: rgba(235, 235, 245, 0.6);
+    font-weight: lighter;
+    display: flex;
+    gap: 5px;
+    letter-spacing: 2px;
+    align-items: flex-start;
+    grid-column: 1 / 3;
+    /*margin-top: 80px;*/
+    align-self: end;
+}
+
+.locationName {
+    color: white;
+    font-size: 16px;
+    justify-self: start;
+    align-self: end;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: white;
+    font-weight: 250;
+    margin-left: 40px;
+    align-self: end;
+    justify-self: center;
+    margin-bottom: 10px;
+}
+
+.locDet {
+    align-self: end;
+}
+
+@media screen and (max-width: 1800px) {
+    .weather {
+        width: 350px;
+        background-size: contain;
+        padding-bottom: 25px;
+    }
+
+    .weatherIcon {
+        width: 150px;
+    }
+}
 

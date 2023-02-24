@@ -1,27 +1,28 @@
 import classes from './current-weather.module.css';
 import {useMemo} from "react";
+import {createWeatherObj} from "../../helpers/createWeatherObj.js";
 const CurrentWeather = ({weather}) => {
 
     const {name, description, temp, icon, details} = useMemo(() => {
-        const {feels_like, humidity, pressure, temp} = weather.main;
-        let {main, icon} = weather.weather[0];
-        icon = `/public/icons/${icon}.png`;
-        const wind = weather['wind'].speed;
-        const name = weather.query;
-        return {
-            name: name,
-            description: main,
-            temp: temp,
-            icon: icon,
-            details: {feels_like, humidity, pressure, wind},
-        }
+        return createWeatherObj(weather);
     }, [weather]);
 
 
 
     return (
         <div className={classes.weather}>
-
+            <p className={classes.temperature}>
+                {temp}°
+            </p>
+            <img src={icon} alt="weather-icon" className={classes.weatherIcon}/>
+            <div className={classes.locDet}>
+                <p className={classes.details}>
+                    <span>H:{details.humidity}°</span>
+                    <span>L:{details.feels_like}°</span>
+                </p>
+                <p className={classes.locationName}>{name}</p>
+            </div>
+            <p className={classes.description}>{description}</p>
         </div>
     );
 };

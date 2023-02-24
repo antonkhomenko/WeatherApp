@@ -1,0 +1,54 @@
+.container {
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    position: relative;
+    background: linear-gradient(180deg, rgba(58, 58, 106, 0.8) 0%, rgba(37, 36, 76, 0.8) 100%);
+    border: 4px solid rgba(89, 54, 180, 80%)
+}
+
+.container::after {
+    -webkit-backdrop-filter: blur(30px); /* Use for Safari 9+, Edge 17+ (not a mistake) and iOS Safari 9.2+ */
+    backdrop-filter: blur(30px); /* Supported in Chrome 76 */
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0;
+    border-radius: 16px;
+}
+
+.nonBlur {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    width: 100%;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(89, 54, 180, 80%);
+    display: flex;
+    justify-content: flex-start;
+    gap: 40px;
+    box-sizing: border-box;
+}
+
+.header > button {
+    border: none;
+    color: rgba(159, 139, 201, 0.87);
+    background: none;
+    cursor: pointer;
+}
+
+.activeForecast {
+    color: rgba(235, 235, 245, 0.6) !important;
+}
+
+
+.rsp {
+    font-size: 13px;
+}
+
+/*rgba(89, 54, 180, 80%)*/

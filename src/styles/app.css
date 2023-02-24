@@ -2,4 +2,21 @@
     max-width: 1800px;
     width: 70%;
     margin: 20px auto;
+    box-sizing: border-box;
+}
+
+.weather-content {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    grid-auto-rows: minmax(230px, 400px);
+}
+
+
+
+@media screen and (max-width: 1800px) {
+    .container {
+        width: 100%;
+        padding: 0 20px;
+    }
 }

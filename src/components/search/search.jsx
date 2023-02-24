@@ -1,36 +1,54 @@
-import classes from './search.module.css';
 import makeAnimated from 'react-select/animated';
-import Select from "react-select";
 import AsyncSelect, { useAsync } from 'react-select/async';
-const Search = (props) => {
+import {getLocation, LOCATION_API_URL, location_options} from "../../api/location.js";
+import {useCallback, useEffect, useMemo, useState} from "react";
+import debounce from 'debounce-promise';
+import Select from "react-select";
+import {AsyncPaginate} from "react-select-async-paginate";
+const Search = ({onSearchChange}) => {
 
     const animatedComponent = makeAnimated();
 
-
-    const opt = [
-        {value: 'apple', label: 'City 1'},
-        {value: 'orange', label: 'City 2'},
-        {value: 'banana', label: 'City 3'},
-    ];
+    const [searchQuery, setSearchQuery] = useState('');
 
 
-    const loadFunc = (inputValue) => {
-         return new Promise(resolve => {
-             setTimeout(() => {
-                 resolve(opt);
-             }, 5000);
-         });
+
+    const sendLocationRequest = async (value) => {
+        const response = await fetch(`${LOCATION_API_URL}?namePrefix=${value}`, location_options);
+        const body = await response.json();
+        const option = body.data.map(item => {
+            return {
+                label: `${item.name}, ${item['country']}`,
+                value: [item.latitude, item.longitude],
+            }
+        });
+        return option;
+    }
+
+    function handleChange(value) {
+        setSearchQuery(value);
+        onSearchChange(value);
+    }
+
+    const loadOption = async (inputValue) => {
+        const optionsValue = await sendLocationRequest(inputValue);
+        return {
+            options: optionsValue,
+        }
     }
 
 
     return (
         <div>
-            <AsyncSelect
-                defaultOptions
-                loadOptions={loadFunc}
-                components={animatedComponent}
-                placeholder='Search for a city'
+
+            <AsyncPaginate
+                value={searchQuery}
+                onChange={handleChange}
+                loadOptions={loadOption}
                 unstyled
+                components={animatedComponent}
+                debounceTimeout={600}
+                placeholder='Search for a city'
                 styles={{
                     control: (baseStyles, state) => {
                         return {
